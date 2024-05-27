@@ -17,6 +17,7 @@ grid_2 = [
 ]
 
 
+
 def main():
     precompute()
     start_front = get_num(grid_1)
@@ -140,21 +141,23 @@ def main():
     if meet:
         print(int_to_heptal(meet_state[0]), int_to_heptal(meet_state[1]))
         path = []
+        path.append(meet_state)
         cur = meet_state
         while cur != start_front:
-            path.append(cur)
+            path.append(prev_front[cur])
             cur = prev_front[cur]
-        path.append(start_front)
         path = path[::-1]
         print([(int_to_heptal(i[0]), int_to_heptal(i[1])) for i in path])
         print('Length:', len(path))
         print([[(i[0].find("0")//3)+1,(i[0].find("0")%3)+1] for i in [(int_to_heptal(i[0]), int_to_heptal(i[1])) for i in path]])
+        
+        
 
 
         cur = meet_state
         while cur != start_back:
+            path.append(prev_back[cur])
             cur = prev_back[cur]
-            path.append(cur)
 
         print('Path:', path)
         print('Length:', len(path) - 1)
